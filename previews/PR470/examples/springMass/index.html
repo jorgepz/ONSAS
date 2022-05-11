@@ -15,7 +15,7 @@ A   = 0.1               ;
 rho = m * 2 / ( A * l ) ;
 E   = k * l /   A       ;</code></pre><p>where the material of the truss was selected to set a constant mass at the node <span>$2$</span> equal to <span>$m$</span>.</p><h2 id="Analytic-solution"><a class="docs-heading-anchor" href="#Analytic-solution">Analytic solution</a><a id="Analytic-solution-1"></a><a class="docs-heading-anchor-permalink" href="#Analytic-solution" title="Permalink"></a></h2><p>The analytical solution of the problem is:</p><p class="math-container">\[  u(t) =
      ( A_c \cos( \omega_D  t ) + B \sin( \omega_D t ) ) e^{ -\xi \omega_N t } +
-    G_1  \cos( \bar{\omega} t ) + G_2 \sin( \bar{\omega} t )\]</p><p>The expression of the equation above are computed depending of <span>$c$</span> and the load amplitude <span>$p_0$</span>:</p><pre><code class="nohighlight hljs">if (c == 0) &amp;&amp; (p0 == 0) % free undamped solution
+    G_1  \cos( \bar{\omega} t ) + G_2 \sin( \bar{\omega} t )\]</p><p>The expression of the equation above is computed depending of <span>$c$</span> and the load amplitude <span>$p_0$</span>:</p><pre><code class="nohighlight hljs">if (c == 0) &amp;&amp; (p0 == 0) % free undamped solution
   myAnalyticFunc = @(t)   (   u0 * cos( omegaN * t )  ) ;
 else                     % other cases solution
   beta   = omegaBar / omegaN ;  omegaD = omegaN * sqrt( 1-xi^2 ) ; %forced and damped
@@ -61,7 +61,7 @@ valsAnaly   = myAnalyticFunc(times)                                             
 verifBooleanNewmark =  ( ( norm( valsAnaly - valsNewmark ) / norm( valsAnaly ) ) &lt;  analyticCheckTolerance ) ;
 verifBooleanHHT     =  ( ( norm( valsAnaly - valsHHT     ) / norm( valsAnaly ) ) &lt;  analyticCheckTolerance ) ;
 verifBoolean        = verifBooleanHHT &amp;&amp; verifBooleanNewmark                                                 ;</code></pre><h2 id="Plot-verification"><a class="docs-heading-anchor" href="#Plot-verification">Plot verification</a><a id="Plot-verification-1"></a><a class="docs-heading-anchor-permalink" href="#Plot-verification" title="Permalink"></a></h2><hr/><p>The control displacement <span>$u(t)$</span> is plotted:  </p><pre><code class="nohighlight hljs">figure
-hold on, grid on, spanPlot = 8 ; lw = 2.0 ; ms = 11 ; plotfontsize = 25 ;
+hold on, grid on, spanPlot = 8 ; lw = 2.0 ; ms = 11 ; plotfontsize = 20 ;
 plot(times, valsAnaly   ,&#39;b-&#39;, &#39;linewidth&#39;, lw,&#39;markersize&#39;,ms )
 plot(times(1:spanPlot:end), valsNewmark(1:spanPlot:end) ,&#39;ro&#39;, &#39;linewidth&#39;, lw,&#39;markersize&#39;, ms )
 plot(times(1:spanPlot:end), valsHHT(1:spanPlot:end)     ,&#39;gs&#39;, &#39;linewidth&#39;, lw,&#39;markersize&#39;, ms )
@@ -69,9 +69,10 @@ labx = xlabel(&#39;t [s]&#39;);   laby = ylabel(&#39;u(t) [m]&#39;) ;
 legend( &#39;analytic&#39;, &#39;truss-Newmark&#39;,&#39;nodalMass-HHT&#39;, &#39;location&#39;,&#39;north&#39;)
 set(gca, &#39;linewidth&#39;, 1.0, &#39;fontsize&#39;, plotfontsize )
 set(labx, &#39;FontSize&#39;, plotfontsize); set(laby, &#39;FontSize&#39;, plotfontsize) ;
-print(&#39;output/springMassCheck.png&#39;,&#39;-dpng&#39;)
 if exist(&#39;../../docs/src/assets/&#39;)==7
   % printing plot also to docs directory
   disp(&#39;printing plot also to docs directory&#39;)
-  print(&#39;../../docs/src/assets/springMassCheck.png&#39;,&#39;-dpng&#39;)
-end</code></pre><img src="../../assets/springMassCheck.png" alt="plot check" width="500"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../staticVonMisesTruss/">« Static Von-Mises Truss</a><a class="docs-footer-nextpage" href="../uniaxialExtension/">Uniaxial extension »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.17 on <span class="colophon-date" title="Tuesday 10 May 2022 22:01">Tuesday 10 May 2022</span>. Using Julia version 1.7.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
+  print(&#39;../../docs/src/assets/springMassCheckU.png&#39;,&#39;-dpng&#39;)
+  else 
+  print(&#39;output/springMassCheckU.png&#39;,&#39;-dpng&#39;)
+end</code></pre><img src="../../assets/springMassCheckU.png" alt="plot check" width="500"/></article><nav class="docs-footer"><a class="docs-footer-prevpage" href="../staticVonMisesTruss/">« Static Von-Mises Truss</a><a class="docs-footer-nextpage" href="../uniaxialExtension/">Uniaxial extension »</a><div class="flexbox-break"></div><p class="footer-message">Powered by <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> and the <a href="https://julialang.org/">Julia Programming Language</a>.</p></nav></div><div class="modal" id="documenter-settings"><div class="modal-background"></div><div class="modal-card"><header class="modal-card-head"><p class="modal-card-title">Settings</p><button class="delete"></button></header><section class="modal-card-body"><p><label class="label">Theme</label><div class="select"><select id="documenter-themepicker"><option value="documenter-light">documenter-light</option><option value="documenter-dark">documenter-dark</option></select></div></p><hr/><p>This document was generated with <a href="https://github.com/JuliaDocs/Documenter.jl">Documenter.jl</a> version 0.27.17 on <span class="colophon-date" title="Wednesday 11 May 2022 18:09">Wednesday 11 May 2022</span>. Using Julia version 1.7.2.</p></section><footer class="modal-card-foot"></footer></div></div></div></body></html>
